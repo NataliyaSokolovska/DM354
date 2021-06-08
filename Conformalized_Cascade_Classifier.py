@@ -569,5 +569,5 @@ purple_patch = mpatches.Patch(color='purple', label='Conformal RuleFit Cascade')
 plt.legend(handles=[blue_patch, violet_patch, green_patch, tan_patch, purple_patch])
 plt.xlabel("Mean nb of features")
 plt.ylabel("Test accuracy")
-plt.savefif('performance.png') 
+plt.savefig('performance.png') 
 
