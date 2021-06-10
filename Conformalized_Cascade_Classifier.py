@@ -245,7 +245,6 @@ def Train_dqn(X_train, X_test, y_train, y_test, X_valid, y_valid, conform, alpha
     '''Pretraining the rejecter'''
     print("Pretraining the rejector...")
     env = ENVdata( Vcost, n_features, n_classes)
-    # agent.load("./save/cartpole-dqn.h5")
     batch_size = 32
     idi = 0
     for e in range(Ep_pretrain):
@@ -472,7 +471,7 @@ X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 X_valid = scaler.transform(X_valid)
 
-# Train cascade classifier with a 
+# Train cascade classifier 
 trained_agent = Train_dqn(X_train, X_test, y_train, y_test, X_valid,y_valid, 'standard',alpha,n_classes)
 Result = Test_dqn(trained_agent,X_train, X_test, y_train, y_test, X_valid,y_valid, 'standard',alpha,n_classes)
 
@@ -497,6 +496,7 @@ rf.fit(X_train, y_train)
 rules = rf.get_rules()
 rules = rules[rules.coef != 0].sort_values("support", ascending=False)
 
+# Reduce the number of rules 
 
 if (math.ceil(np.mean(mean_nb_features[:,0])) // 2 > len(rules) ) :
     rules = rules[rules.importance >= np.sort(rules['importance'])[::-1][math.ceil(np.mean(mean_nb_features[:,0]))//2]]
@@ -504,8 +504,6 @@ elif (math.ceil(np.mean(mean_nb_features[:,0])) > len(rules) ) :
     rules = rules[rules.importance >= np.sort(rules['importance'])[::-1][math.ceil(np.mean(mean_nb_features[:,0]))]]
 else :
     rules = rules[rules.importance >= np.sort(rules['importance'])[::-1][len(rules)//2]]
-
-# Reduce the number of rules 
 
 NFolds = 10
 kf = KFold(n_splits=NFolds)
