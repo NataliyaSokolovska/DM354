@@ -1,6 +1,6 @@
 # DM354 
 
-This Python code is a supplementary material for paper DM354.  
+This Python code is a supplementary material for Paper ID: 884.  
 
 The following Python packages are used: 
 random, numpy, collections, keras, sklearn, functools, matplotlib, math.
